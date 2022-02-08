@@ -1,45 +1,80 @@
 import React from 'react';
-import "./leftMenu.css";
+
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import { useNavigate } from "react-router-dom";
 const LeftMenu = () => {
-  return <div>
+  let navigate = useNavigate(); 
+  return <div >
       <Navigation
             // you can use your own router's api to get pathname
-            activeItemId="/management/members"
+            activeItemId="/"
             onSelect={({itemId}) => {
               // maybe push to the route
+              if(!itemId.includes("*")){
+                navigate(itemId);
+              }
+              
+
             }}
             items={[
               {
                 title: 'Dashboard',
-                itemId: '/dashboard',
+                itemId: '/',
                 // you can use your own custom Icon component as well
                 // icon is optional
-                elemBefore: () => <Icon name="inbox" />,
+               // elemBefore: () => <Icon name="inbox" />,
               },
               {
-                title: 'Management',
-                itemId: '/management',
-                elemBefore: () => <Icon name="users" />,
+                title: 'HR',
+                itemId: '/hr*',
+                //elemBefore: () => <Icon name="users" />,
                 subNav: [
                   {
-                    title: 'Projects',
-                    itemId: '/management/projects',
+                    title: 'User Type',
+                    itemId: '/hr/usertype',
                   },
                   {
-                    title: 'Members',
-                    itemId: '/management/members',
+                    title: 'User',
+                    itemId: '/hr/user',
+                  },
+                  {
+                    title: 'Payslip',
+                    itemId: '/hr/payslip',
                   },
                 ],
               },
               {
-                title: 'Another Item',
-                itemId: '/another',
+                title: 'Inventory',
+                itemId: '/inventory*',
                 subNav: [
                   {
-                    title: 'Teams',
-                    itemId: '/management/teams',
+                    title: 'Store',
+                    itemId: '/inventory/store',
+                  },
+                  {
+                    title: 'Branch',
+                    itemId: '/inventory/branch',
+                  },
+                  {
+                    title: 'Site',
+                    itemId: '/inventory/site',
+                  },
+                  {
+                    title: 'Category',
+                    itemId: '/inventory/category',
+                  },
+                  {
+                    title: 'Sub Category',
+                    itemId: '/inventory/subcategory',
+                  },
+                  {
+                    title: 'Item',
+                    itemId: '/inventory/item',
+                  },
+                  {
+                    title: 'Item Details',
+                    itemId: '/inventory/itemdetails',
                   },
                 ],
               },

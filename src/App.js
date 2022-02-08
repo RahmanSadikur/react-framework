@@ -12,7 +12,7 @@ const App=()=> {
     <div className="App">
       <ToastContainer/>
       <Routes>
-        <Route exact path="/"  element={<Main />} />
+        <Route exact path="*"  element={<Main />} />
         <Route exact path="/login" element={<Login />}/>
       </Routes>
     </div>
