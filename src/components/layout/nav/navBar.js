@@ -12,7 +12,7 @@ const NavBar = () => {
             <Link to="/hr/profile" className='navbar-brand ml-5'>Profile</Link>
             </li>
             <li class="nav-item">
-            <Link to="/logout" className='navbar-brand ml-5'>Log out</Link>
+            <Link to="/logout" className='navbar-brand ml-5'><img className='logout' src="/logout.png" alt="image" /></Link>
             </li>
         </ul>
         </div>
