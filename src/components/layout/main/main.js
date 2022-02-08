@@ -25,10 +25,10 @@ const Main = () => {
     </div>
      
       <div className='row ml-2 mr-2'>
-      <div className='col col-lg-2'>
+      <div className='col col-lg-2' >
       <LeftMenu/>
       </div>
-      <div className='col col-lg-10'>
+      <div className='col col-lg-10' >
       <Routes>
       <Route exact path="/"  element={<Dashboard/>} />
       <Route exact path="/inventory/store"  element={<Store/>} />
