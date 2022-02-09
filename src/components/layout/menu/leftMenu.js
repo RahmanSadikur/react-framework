@@ -26,6 +26,13 @@ const LeftMenu = () => {
                // elemBefore: () => <Icon name="inbox" />,
               },
               {
+                title: 'Test',
+                itemId: '/test',
+                // you can use your own custom Icon component as well
+                // icon is optional
+               // elemBefore: () => <Icon name="inbox" />,
+              },
+              {
                 title: 'HR',
                 itemId: '/hr*',
                 //elemBefore: () => <Icon name="users" />,
