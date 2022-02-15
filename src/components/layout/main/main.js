@@ -14,15 +14,16 @@ import UserType from '../../hr/userType/userType';
 import User from '../../hr/user/user';
 import Credential from '../../hr/credential/credential';
 import Payslip from '../../hr/payslip/payslip';
+import Test from '../../test/test';
 
 
 const Main = () => {
   return <div>
-    <div className='row mb-5 ml-2 mr-2'>
+    {/* <div className='row mb-5 ml-2 mr-2'>
       <div className='col col-lg-12'>
       <NavBar/>
       </div>
-    </div>
+    </div> */}
      
       <div className='row ml-2 mr-2'>
       <div className='col col-lg-2' >
@@ -40,8 +41,9 @@ const Main = () => {
       <Route exact path="/inventory/itemdetails"  element={<ItemDetails/>} />
       <Route exact path="/hr/usertype"  element={<UserType/>} />
       <Route exact path="/hr/user"  element={<User/>} />
-      <Route exact path="/hr/credential"  element={<Credential/>} />
+      <Route exact path="/hr/profile"  element={<Credential/>} />
       <Route exact path="/hr/payslip"  element={<Payslip/>} />
+       <Route exact path="/test"  element={<Test/>} />
 
       </Routes>
 
