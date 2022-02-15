@@ -3,24 +3,58 @@ import PropTypes from 'prop-types';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import './login.css';
+
 async function loginUser(credentials) {
-  return fetch('http://localhost:69/api/auth', {
-    method: 'POST',
+  const options = {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(
-     data  =>data.json()
-      )
-  // return axios.post('http://localhost:69/api/auth', {
-  //   userName    : credentials.userName,
-  //   password : credentials.userName.password
-  // }).then(data  =>data.json())
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      
+  }
+  };
+  
+  // return Post('http://localhost:69/api/auth', {
+  //   method: 'POST',
+  //   headers: {
+  //      'Accept': 'application/json',
+  //   'Content-Type': 'application/x-www-form-urlencoded',
+  //   'Access-Control-Allow-Origin': '*',
+
+  //   },
+  //   body: JSON.stringify(credentials)
+  // })
+  //   .then(
+  //    data  =>data.json()
+  //     )
+  try{
+    return axios.post('http://localhost:8080/api/auth',credentials).then(data  =>data)
+
+  }  catch (error) {
+        //const err = error as AxiosError
+        if (error.response) {
+           console.log(error.response.status)
+           console.log(error.response.data)
+        }
+        else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error);
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+       // this.handleAxiosError(error)
+     }
+
  }
 const Login = ({ setToken }) => {
+  let navigate = useNavigate(); 
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
   const handleSubmit = async e => {
@@ -29,8 +63,13 @@ const Login = ({ setToken }) => {
       userName,
       password
     });
-    console.log(token);
-    setToken(token);
+    console.log(token.data);
+    if(token!==null||token !==undefined){
+      setToken(token.data);
+     // navigate("/dashboard")
+     window.location.href="/dashboard"
+    }
+    
   }
   return<div className='row mt-5'>
     <div className='col col-lg-4'></div>
