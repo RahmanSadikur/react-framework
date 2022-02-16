@@ -63,9 +63,11 @@ const Login = ({ setToken }) => {
       userName,
       password
     });
+    console.log(token);
     console.log(token.data);
     if(token!==null||token !==undefined){
       setToken(token.data);
+      sessionStorage.setItem('userName', userName);
      // navigate("/dashboard")
      window.location.href="/dashboard"
     }

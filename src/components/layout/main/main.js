@@ -15,21 +15,23 @@ import User from '../../hr/user/user';
 import Credential from '../../hr/credential/credential';
 import Payslip from '../../hr/payslip/payslip';
 import Test from '../../test/test';
+import Sidebar from '../sidebar/sidebar'
 
 
 const Main = () => {
   return <div>
-    {/* <div className='row mb-5 ml-2 mr-2'>
+    <div className='row mb-5 ml-2 mr-2'>
       <div className='col col-lg-12'>
       <NavBar/>
       </div>
-    </div> */}
+    </div>
      
       <div className='row ml-2 mr-2'>
-      <div className='col col-lg-2' >
-      <LeftMenu/>
+      <div className='col' >
+      {/* <LeftMenu/> */}
+      <Sidebar/>
       </div>
-      <div className='col col-lg-10' >
+      <div className='col' >
       <Routes>
       <Route exact path="/"  element={<Dashboard/>} />
       <Route exact path="/inventory/store"  element={<Store/>} />

@@ -9,10 +9,10 @@ import UseToken from './components/auth/useToken';
 
 const App=()=> {
 
-//  const { token, setToken } = UseToken();
-//   if(!token) {
-//     return <Login setToken={setToken}/>
-//   }
+ const { token, setToken } = UseToken();
+  if(!token) {
+    return <Login setToken={setToken}/>
+  }
   return (
     <div className="App">
       <ToastContainer/>
