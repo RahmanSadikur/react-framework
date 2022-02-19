@@ -1,5 +1,5 @@
 nav .navbar-nav li a{
-  color: black !important;
+  color: rgb(255, 255, 255) !important;
   }
   .logo {
     height: 30px;
@@ -27,4 +27,16 @@ nav .navbar-nav li a{
   overflow: hidden;
   position: relative;
   height: 35px;
+}
+.ms-auto {
+  margin-left: auto!important;
+  margin-right: 20px;
+}
+.navbar-brand {
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 2rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  white-space: nowrap;
 }
