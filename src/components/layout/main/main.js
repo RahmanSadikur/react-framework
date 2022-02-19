@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LeftMenu from '../menu/leftMenu';
 import NavBar from '../nav/navBar';
 import { Routes,Route } from 'react-router-dom';
@@ -16,10 +16,12 @@ import Credential from '../../hr/credential/credential';
 import Payslip from '../../hr/payslip/payslip';
 import Test from '../../test/test';
 import Sidebar from '../sidebar/sidebar'
+import "./main.css"
 
 
 const Main = () => {
-  return <div>
+  const [menuCollapse, setMenuCollapse] = useState(false)
+  return <div className='container-fluid'> 
     <div className='row mb-5 ml-2 mr-2'>
       <div className='col col-lg-12'>
       <NavBar/>
@@ -27,11 +29,11 @@ const Main = () => {
     </div>
      
       <div className='row ml-2 mr-2'>
-      <div className='col' >
+      <div className={`switch ${menuCollapse ? "col-md-1" : "col-md-2"}`}  >
       {/* <LeftMenu/> */}
-      <Sidebar/>
+      <Sidebar menuCollapse={menuCollapse} setMenuCollapse={setMenuCollapse} />
       </div>
-      <div className='col' >
+      <div className={`switch ${menuCollapse ? "col-md-11" : "col-md-10"}`}  >
       <Routes>
       <Route exact path="/"  element={<Dashboard/>} />
       <Route exact path="/inventory/store"  element={<Store/>} />
