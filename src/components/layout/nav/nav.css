@@ -11,3 +11,20 @@ nav .navbar-nav li a{
     width: 30px;
     margin-right: 2%;
   }
+  .justify-content-center {
+    justify-content: center!important;
+    width: 40%;
+}
+.p-button {
+  margin: 0;
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  align-items: center;
+  vertical-align: bottom;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  height: 35px;
+}
