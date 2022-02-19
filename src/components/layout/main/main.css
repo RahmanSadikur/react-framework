@@ -1,23 +1,4 @@
-.sidecollapse{
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
-}
-.sidenotcollapse{
-    width: 220px;
-    max-width: 220px;
-    min-width: 220px;
-}
-.maindivcollaps{
-    width: calc(100% - 80px);
-    min-width: calc(100% - 80px);
-    max-width:calc(100% - 80px); ;
-}
-.maindivnotcollaps{
-    width: calc(100% - 220px);
-    min-width: calc(100% - 220px);
-    max-width:calc(100% - 220px); ;
-}
+
 .container-fluid{
     min-width: calc(100vw);
     max-width:calc(100vw); 
@@ -25,4 +6,12 @@
     height:calc(100vh);
     min-height:calc(100vh) ;
     max-height: calc(100vh);
+    padding-left: 0px;
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: 0px !important;
+    margin-right: auto;
+    margin-left: auto;
 }

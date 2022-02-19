@@ -42,18 +42,21 @@ const Sidebar = ({menuCollapse, setMenuCollapse}) => {
           {/* collapsed props to change menu size using menucollapse state */}
         <ProSidebar collapsed={menuCollapse}>
           <SidebarHeader>
-          <div className="logotext">
-              {/* small and big change using menucollapse state */}
-              <p>{menuCollapse ? "Logo" : "Big Logo"}</p>
+          <div className="logotext" onClick={menuIconClick}>
+          
+              <p>  {menuCollapse ? (
+                <FiArrowRightCircle  size={42}/> 
+              ) : (
+                <FiArrowLeftCircle  size={42}/>
+              )}</p>
             </div>
-            <div className="closemenu" onClick={menuIconClick}>
-                {/* changing menu collapse icon on click */}
+            {/* <div className="closemenu" onClick={menuIconClick}>
               {menuCollapse ? (
                 <FiArrowRightCircle/>
               ) : (
                 <FiArrowLeftCircle/>
               )}
-            </div>
+            </div> */}
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
