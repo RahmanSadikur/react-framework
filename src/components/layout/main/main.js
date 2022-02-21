@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import LeftMenu from '../menu/leftMenu';
 import NavBar from '../nav/navBar';
 import { Routes,Route } from 'react-router-dom';
 import Dashboard from '../../../components/dashboard/dashboard';
@@ -16,11 +15,12 @@ import Credential from '../../hr/credential/credential';
 import Payslip from '../../hr/payslip/payslip';
 import Test from '../../test/test';
 import Sidebar from '../sidebar/sidebar'
+import SearchBarResult from '../../utility/searchBarResult'
 import "./main.css"
 
 
 const Main = () => {
-  const [menuCollapse, setMenuCollapse] = useState(false)
+  const [menuCollapse, setMenuCollapse] = useState(true)
   return <div className='container-fluid'> 
     <div className='row mb-5 ml-2 mr-2'>
       <div className='col col-lg-12'>
@@ -48,6 +48,7 @@ const Main = () => {
       <Route exact path="/hr/profile"  element={<Credential/>} />
       <Route exact path="/hr/payslip"  element={<Payslip/>} />
        <Route exact path="/test"  element={<Test/>} />
+       <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
 
       </Routes>
 

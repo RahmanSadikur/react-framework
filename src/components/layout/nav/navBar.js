@@ -2,28 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AutoSuggest } from 'react-autosuggestions';
 import { Button } from 'primereact/button';
-// import { useNavigate } from "react-router-dom";
+import {LayoutService} from "../../../services/layout/layoutServices"
+ import {useNavigate } from "react-router-dom";
 import "./nav.css";
-import { Row } from 'react-bootstrap';
 
 const NavBar = () => {
+  const layoutService = new LayoutService();
+  let navigate = useNavigate();
   useEffect(() => {
      // countryservice.getCountries().then(data => setOptions(data));
+     layoutService.getItemListForSearch().then(data=>{
+       return setOptions(data.data);
+      });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [options, setOptions] = useState([
-    "Acura",
-    "BMW",
-    "Audi",
-    "Bentley",
-    "Buick",
-    "Cadillac",
-    "Chevrolet",
-    ]);
+  const [options, setOptions] = useState([ ]);
+  const [searchItems, setSearchItems] = useState([ ]);
   const [product, setproduct] = useState();
   const handleSubmit = (e) => {
       e.preventDefault();
-      alert(`The product selected was ${product}`)
+      
+      if(product ===""||product === undefined ||product ===null){ return;}
+      else{
+        
+        let idWithPostfix=product.split("[")[1];
+        let id=idWithPostfix.split("]")[0];
+        layoutService.getItemDetailsListForSearch(id).then(data=>{
+
+         return navigate("searchbarresult",{state: data });
+        });
+
+      }
+      
+
   }
   // let navigate = useNavigate(); 
  const userName=sessionStorage.getItem('userName');
@@ -98,7 +109,7 @@ const NavBar = () => {
                  </div>
                  <div className='col'>
                  {/* <button >Submit</button> */}
-                 <Button label="Submit" className="p-button-success" />
+                 <Button label="Search" className="p-button-success" />
                </div>
              </div>  
         </form>
