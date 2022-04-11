@@ -9,15 +9,19 @@ import { BrowserRouter  as Router} from 'react-router-dom';
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";     
+import Store from './redux/store';
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
+  <Provider store={Store}>
   <React.StrictMode>
  
     <Router>
     <App />
     </Router>
    
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
