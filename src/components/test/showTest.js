@@ -19,7 +19,7 @@ const ShowTest = ( {changeIsAddnew} ) => {
 
     const columns = [
         {field: 'id', header: 'ID'},
-        {field: 'name', header: 'Name'}
+        {field: 'title', header: 'Title'}
     ];
     const dynamicColumns = columns.map((col,i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
@@ -55,7 +55,7 @@ const ShowTest = ( {changeIsAddnew} ) => {
       <div className='row'>
             <div className='col-md-12'>
             <DataTable value={tests} selectionMode="single"
-                selection={test} onSelectionChange={e => {setTest(e.value);
+                selection={test} onRowDoubleClick={(e) => {setTest(e.data);
                 console.log(test)
                 }} header={header} responsiveLayout="scroll"  dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"

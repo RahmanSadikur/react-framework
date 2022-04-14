@@ -1,13 +1,14 @@
 import { GET_DETAILS } from "../type";
 const initState={
-    data:[{id:1,name:"Sadik"},{id:2,name:"rupna"}],
+    data:[],
 }
 
 
 const Reducer = (state=initState,action) => {
   switch(action.type){
       case GET_DETAILS:
-          return state;
+         return{data: action.payload} ;
+         
           default:
               return state;
   }
