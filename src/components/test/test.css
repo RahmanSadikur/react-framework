@@ -41,3 +41,36 @@
     padding: .3px !important;
 
 }
+.p-toolbar {
+    background: #f8f9fa;
+    background-color: #c5e9e6 !important;
+    border: 1px solid #dee2e6 !important;
+    padding: .3rem !important;
+    border-radius: 15px !important;
+    margin-top: 1.2rem !important;
+}
+.p-dialog .p-dialog-header {
+    background-color: #c5e9e6 !important;
+    border-bottom: 0 none;
+    background: #ffffff;
+    color: #343a40;
+    padding: .5rem !important;
+    border-top-right-radius: 15px !important;
+    border-top-left-radius: 15px !important;
+}
+.p-dialog .p-dialog-footer {
+    background-color: #c5e9e6 !important;
+    border-top: 0 none;
+    background: #ffffff;
+    color: #495057;
+    padding: .5rem !important;
+    text-align: right;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.p-calendar-w-btn-right .p-datepicker-trigger {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: fit-content !important;
+    background-color: #c5e9e6 !important;
+}

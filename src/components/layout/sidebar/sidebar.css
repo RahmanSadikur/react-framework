@@ -1,5 +1,5 @@
 #header {
-    position: absolute;
+    position: relative;
     width: 220px;
     
 
@@ -9,7 +9,7 @@
   }
   #header .closemenu {
     color: #000;
-    position: absolute;
+    position: fixed;
     right: 0;
     z-index: 9999;
     line-height: 20px;
