@@ -1,14 +1,20 @@
 import axios from 'axios';
-export async function AxiosRequest(url,method,params){
+export async function AxiosRequest(url,method,data){
     const  token = JSON.parse(sessionStorage.getItem('token'));
     const header={
         "Authorization" : `Bearer ${token}`,
     }
-     return params?axios({
+    // if(data!=null){
+    //    data = JSON.stringify(data);
+    //    console.log(data); 
+    // }
+    try{ 
+        return data?axios({
         url:'http://localhost:8080/api/'+url,
          method:method,
          headers:header,
-         params:params,
+        
+         data:data,
          timeout:1000,
          
      }):axios({
@@ -18,5 +24,26 @@ export async function AxiosRequest(url,method,params){
          params:{},
          timeout:1000,
          
-     });
+     });}
+     catch(error){
+        console.error(error.response.data); 
+     }
+    
  }
+
+ export const errorUtils = {
+    getError: (error) => {
+      let e = error;
+      if (error.response) {
+        e = error.response.data;                   // data, status, headers
+        if (error.response.data && error.response.data.error) {
+          e = error.response.data.error;           // my app specific keys override
+        }
+      } else if (error.message) {
+        e = error.message;
+      } else {
+        e = "Unknown error occured";
+      }
+      return e;
+    },
+  };

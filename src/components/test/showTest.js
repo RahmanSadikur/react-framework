@@ -12,10 +12,12 @@ import { Dialog } from 'primereact/dialog';
 import { Toolbar } from 'primereact/toolbar';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
+import { InputNumber } from 'primereact/inputnumber';
 import './test.css'
 
 const ShowTest = ( {changeIsAddnew} ) => {
     const dispatch=useDispatch();
+    const dispatch1=useDispatch();
     const tests=useSelector((state)=>state.reducer.data);
     //const [tests, setTests] = useState(testdetails);
     const [test, setTest] = useState({});
@@ -24,6 +26,11 @@ const ShowTest = ( {changeIsAddnew} ) => {
     const [formDialog, setformDialog] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [deleteTestDialog, setdeleteTestDialog] = useState(false);
+    const [id, setId] = useState(null);
+    const [title, setTitle] = useState('');
+    const [date, setDate] = useState(Date.now);
+    const [isDeleted, setIsDeleted] = useState(0);
+    
     const isRemoved = [
         { id: 0, title: 'No' },
         { id: 1, title: 'Yes' },
@@ -62,7 +69,11 @@ const ShowTest = ( {changeIsAddnew} ) => {
         </div>
     );
     const openNew = () => {
-        setTest({});
+       // setTest({});
+       setId(null);
+       setTitle('');
+       setDate(Date.now);
+       setIsDeleted(0);
         setSubmitted(false);
         setformDialog(true);
     }
@@ -72,36 +83,27 @@ const ShowTest = ( {changeIsAddnew} ) => {
     }
     const savetest = () => {
         setSubmitted(true);
-
-        if (test.title.trim()) {
-            let _tests = [...tests];
-            let _test = {...test};
-            if (test.id) {
-               // const index = findIndexById(test.id);
-
-               // _tests[index] = _test;
-                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'test Updated', life: 3000 });
-            }
-            else {
-                
-                _tests.push(_test);
-                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'test Created', life: 3000 });
-            }
-            //tests=_tests;
-
-           // setTests(_tests);
-           tests=_tests;
-            setformDialog(false);
-            setTest({});
+       
+        let data={
+            id:id,
+            title:title,
+            isRemoved:isDeleted,
+            updatedAt:date
         }
+        console.log(data);
+       dispatch1(SaveAction(data));
+       hideDialog();
+
     }
 
     const edittest = (t) => {
         
          t.updatedAt = Date.parse(t.updatedAt);
-       
-        setTest({...t});
-
+         let a= t.isRemoved?1:0;
+         setId(t.id);
+         setTitle(t.title);
+         setDate(t.updatedAt);
+         setIsDeleted(a);
         setformDialog(true);
     }
     const confirmDeleteProduct = (test) => {
@@ -143,6 +145,8 @@ const ShowTest = ( {changeIsAddnew} ) => {
         const val = (e.target && e.target.value) || '';
         let _test = {...test};
         _test[`${title}`] = val;
+        setTitle(val);
+         
 
         setTest(_test);
     }
@@ -150,15 +154,20 @@ const ShowTest = ( {changeIsAddnew} ) => {
         const val = e.value;
         let _test = {...test};
         _test.updatedAt = val;
+        setDate(val);
+         
 
         setTest(_test);
     }
+   const onInputNumberChange=(e)=>{
+    setId(e.value);
+    }
     const onDropDownChange = (e) => {
-        console.log(e.value.id)
-        const val =e.value.id;
+        console.log(e.value)
+        const val =e.value;
         let _test = {...test};
         _test.isRemoved = val;
-console.log(_test);
+        setIsDeleted(val);
         setTest(_test);
     }
   return <div className='container'>
@@ -181,20 +190,24 @@ console.log(_test);
         </DataTable>
             </div>
             <Dialog visible={formDialog} style={{ width: '450px' }} header="User Type Details" modal className="p-fluid grid formgrid" footer={formDialogFooter} onHide={hideDialog}>
-             
-                <div className="field">
+                <div className="field pb-2 pt-3">
+                        <label htmlFor="ID">ID</label>
+                        <InputNumber id="ID"  value={id} onValueChange={(e) => onInputNumberChange(e)} mode="decimal" readOnly={true}/>
+                    </div>
+                <div className="field pb-2 pt-1">
                     <label htmlFor="title">Title</label>
-                    <InputText id="title" value={test.title} onChange={(e) => onInputChange(e, 'title')} required autoFocus className={classNames({ 'p-invalid': submitted && !test.name })} />
+                    <InputText id="title" value={title} onChange={(e) => onInputChange(e, 'title')} required autoFocus className={classNames({ 'p-invalid': submitted && !test.name })} />
                     {submitted && !test.title && <small className="p-error">Title is required.</small>}
                 </div>
-                <div className="field">
-                    <label htmlFor="isRemoved">Is Removed</label>
-                    <Dropdown value={test.isRemoved} options={isRemoved} onChange={onDropDownChange} optionLabel="title" placeholder="Select a option" />
-                </div>
-                     <div className="field col-12 md:col-4">
+                
+                     <div className="field pb-2 pt-1">
                         <label htmlFor="updatedAt">Updated At</label>
-                        <Calendar id="updatedAt" value={test.updatedAt} onChange={(e) => ondateChange(e)} showIcon />
+                        <Calendar id="updatedAt" name='updatedAt' value={date} onChange={(e) => ondateChange(e)} showIcon />
                     </div>
+                    <div className="field pb-3 pt-1">
+                    <label htmlFor="isRemoved">Is Removed</label>
+                    <Dropdown value={isDeleted} options={isRemoved} onChange={onDropDownChange} optionValue="id" optionLabel="title" placeholder="Select a option" />
+                </div>
                 {/* <div className="field">
                     <label className="mb-3">Category</label>
                     <div className="formgrid grid">
