@@ -19,6 +19,7 @@ const ShowTest = ( {changeIsAddnew} ) => {
     const dispatch=useDispatch();
     const dispatch1=useDispatch();
     const tests=useSelector((state)=>state.reducer.data);
+    const test1=useSelector((state)=>state.reducer.singleData);
     //const [tests, setTests] = useState(testdetails);
     const [test, setTest] = useState({});
     const [globalFilter, setGlobalFilter] = useState(null);
@@ -90,8 +91,11 @@ const ShowTest = ( {changeIsAddnew} ) => {
             isRemoved:isDeleted,
             updatedAt:date
         }
-        console.log(data);
-       dispatch1(SaveAction(data));
+        
+        dispatch(SaveAction(data));
+       console.log(tests);
+   
+       toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Saved Successfully', life: 3000 });
        hideDialog();
 
     }

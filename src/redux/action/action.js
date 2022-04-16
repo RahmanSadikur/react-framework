@@ -21,6 +21,7 @@ const SaveAction = (req) => {
   const userTypeServices=new UserTypeService();
  return function(dispatch){
 return userTypeServices.Save(req).then((res)=>{
+
 dispatch({
   type:SAVE,
   payload:res.data.data,
