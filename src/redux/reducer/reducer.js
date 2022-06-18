@@ -1,7 +1,6 @@
 import {GET_DETAILS ,SAVE } from "../type";
 const initState={
-    data:[],
-    singleData:{},
+    data:[]
 }
 
 
@@ -28,7 +27,7 @@ const Reducer = (state=initState,action) => {
         }
         state.data.unshift(action.payload);
        
-        return state.data ;
+        return {data:[...state.data]} ;
       }
          
          

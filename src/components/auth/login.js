@@ -30,7 +30,7 @@ async function loginUser(credentials) {
   //    data  =>data.json()
   //     )
   try{
-    return axios.post('http://localhost:8080/api/auth',credentials).then(data  =>data)
+    return axios.post('http://localhost:1400/api/auth',credentials).then(data  =>data)
 
   }  catch (error) {
         //const err = error as AxiosError

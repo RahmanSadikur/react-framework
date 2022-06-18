@@ -17,6 +17,7 @@ dispatch({
   
 }
 
+
 const SaveAction = (req) => {
   const userTypeServices=new UserTypeService();
  return function(dispatch){
@@ -31,5 +32,6 @@ dispatch({
   }
   
 }
+
 
 export {GetAllAction,SaveAction} ;

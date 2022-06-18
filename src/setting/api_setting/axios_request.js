@@ -10,7 +10,7 @@ export async function AxiosRequest(url,method,data){
     // }
     try{ 
         return data?axios({
-        url:'http://localhost:8080/api/'+url,
+        url:'http://localhost:1400/api/'+url,
          method:method,
          headers:header,
         
@@ -18,7 +18,7 @@ export async function AxiosRequest(url,method,data){
          timeout:1000,
          
      }):axios({
-        url:'http://localhost:8080/api/'+url,
+        url:'http://localhost:1400/api/'+url,
          method:method,
          headers:header,
          params:{},
