@@ -31,20 +31,29 @@ const Main = () => {
   const [isAccessClick, setisAccessClick] = useState(false)
   const [Collapse, setCollapse] = useState(true)
   const [menuIndex, setmenuIndex] = useState(0)
-  const menulist = [
-    { id: 1, menuIndex: 3,name:"store", title: 'Store',link:"/inventory/store",isSelect:false,hasChild:false },
-    { id: 2,menuIndex: 3,name:"branch", title: 'Branch',link:"/inventory/branch",isSelect:false,hasChild:false },
-    { id: 3,menuIndex: 3,name:"site", title: 'Site',link:"/inventory/site",isSelect:false,hasChild:false },
-    { id: 4, menuIndex: 3,name:"category", title: 'Category',link:"/inventory/category",isSelect:false,hasChild:false },
-    { id: 5,menuIndex: 3,name:"subCategory", title: 'Sub Category',link:"/inventory/subcategory",isSelect:false,hasChild:false },
-    { id: 6,menuIndex: 3,name:"item", title: 'Product',link:"/inventory/item",isSelect:false,hasChild:false },
-    { id: 7,menuIndex: 3,name:"itemdetails", title: 'Product Details',link:"/inventory/itemdetails",isSelect:false,hasChild:false },
-    { id: 8, menuIndex: 2,name:"userType", title: 'User Type',link:"/hr/usertype",isSelect:false,hasChild:false },
-    { id: 9, menuIndex: 2,name:"user", title: 'User',link:"/hr/user",isSelect:false,hasChild:false },
-    { id: 10, menuIndex: 2,name:"payslip", title: 'Payslip',link:"/hr/payslip",isSelect:false,hasChild:false },
+  const childMenulist = [
+    { id: 1, parentMenuIndex: 3,name:"store", title: 'Store',link:"/inventory/store",isSelect:false,hasChild:false },
+    { id: 2,parentMenuIndex: 3,name:"branch", title: 'Branch',link:"/inventory/branch",isSelect:false,hasChild:false },
+    { id: 3,parentMenuIndex: 3,name:"site", title: 'Site',link:"/inventory/site",isSelect:false,hasChild:false },
+    { id: 4, parentMenuIndex: 3,name:"category", title: 'Category',link:"/inventory/category",isSelect:false,hasChild:false },
+    { id: 5,parentMenuIndex: 3,name:"subCategory", title: 'Sub Category',link:"/inventory/subcategory",isSelect:false,hasChild:false },
+    { id: 6,parentMenuIndex: 3,name:"item", title: 'Product',link:"/inventory/item",isSelect:false,hasChild:false },
+    { id: 7,parentMenuIndex: 3,name:"itemdetails", title: 'Product Details',link:"/inventory/itemdetails",isSelect:false,hasChild:false },
+    { id: 8, parentMenuIndex: 2,name:"userType", title: 'User Type',link:"/hr/usertype",isSelect:false,hasChild:false },
+    { id: 9, parentMenuIndex: 2,name:"user", title: 'User',link:"/hr/user",isSelect:false,hasChild:false },
+    { id: 10, parentMenuIndex: 2,name:"payslip", title: 'Payslip',link:"/hr/payslip",isSelect:false,hasChild:false },
 
 ];
+const mainMenulist = [
+  { id: 1, name:"DashBorad", title: 'Dash-Borad',icon:"pi pi-chart-bar",isSelect:false,hasChild:true },
+  { id: 2,name:"HR", title: 'HR',icon:"pi pi-users",isSelect:false,hasChild:true },
+  { id: 3,name:"Inventory", title: 'Inventory',icon:"pi pi-building",isSelect:false,hasChild:true },
+  { id: 4,name:"Order", title: 'Order',icon:"pi pi-list",isSelect:false,hasChild:true },
+  { id: 5,name:"Chalan", title: 'Chalan',icon:"pi pi-pencil",isSelect:false,hasChild:true },
+  { id: 6,name:"Administration", title: 'Administration',icon:"pi pi-user-edit",isSelect:false,hasChild:true },
+ 
 
+];
 
   
   
@@ -58,200 +67,54 @@ const Main = () => {
 
 
     <div className="flex flex-row flex-wrap card-container blue-container">
+     
         <div className="flex align-items-start justify-content-center cl1 min-h-screen  font-bold text-white mt-5">
           
         <div className="flex flex-column card-container green-container ">
-        <div className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip='Dash-Borad' icon="pi pi-chart-bar" onClick={(e) =>{
-         if(Collapse===false){
-          setCollapse(true);
-          setisDashClick(true);
-          setisAccessClick(false);
-          setisInventoryClick(false);
-          setisChalanClick(false);
-          setisHrClick(false);
-          setisOrderClick(false);
-         }else{
-          if(isDashClick){
-            setCollapse(false);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-          else{
-            setCollapse(true);
-            setisDashClick(true);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
 
-         }
-         setmenuIndex(1);
-        
-        }
-           } /></div>
-        <div className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip='HR'  icon="pi pi-building" onClick={(e) => { 
-           if(Collapse===false){
-            setCollapse(true);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(true);
-            setisOrderClick(false);
-           }else{
-            if(isHrClick){
-              setCollapse(false);
-              setisDashClick(false);
-              setisAccessClick(false);
-              setisInventoryClick(false);
-              setisChalanClick(false);
-              setisHrClick(false);
-              setisOrderClick(false);
-            }
-            else{
+        { mainMenulist.map(element => {
+        return (
+          <div key={element.id} className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip={`${element.title}`} icon={`${element.icon}`} onClick={(e) =>{
+            if(Collapse===false){
               setCollapse(true);
-              setisDashClick(false);
-              setisAccessClick(false);
-              setisInventoryClick(false);
-              setisChalanClick(false);
-              setisHrClick(true);
-              setisOrderClick(false);
+              mainMenulist.forEach(e => {
+                if(e.id===element.id){
+                  e.isSelect=true;
+                }else{
+                  e.isSelect=false;
+                }
+                
+              });
+             
+            }else{
+             if(element.isSelect){
+               setCollapse(false);
+               mainMenulist.forEach(e => {
+              
+                  e.isSelect=false;
+                
+              });
+             }
+             else{
+              setCollapse(true);
+              mainMenulist.forEach(e => {
+                if(e.id===element.id){
+                  e.isSelect=true;
+                }else{
+                  e.isSelect=false;
+                }
+                
+              });
+             }
+   
             }
-  
+            setmenuIndex(element.id);
+           
            }
-           setmenuIndex(2);
-        }} /></div>
-        <div className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass "  tooltip='Inventory'  icon="pi pi-list" onClick={(e) =>{ if(Collapse===false){
-          setCollapse(true);
-          setisDashClick(false);
-          setisAccessClick(false);
-          setisInventoryClick(true);
-          setisChalanClick(false);
-          setisHrClick(false);
-          setisOrderClick(false);
-         }else{
-          if(isInventoryClick){
-            setCollapse(false);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-          else{
-            setCollapse(true);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(true);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-
-         }
-         setmenuIndex(3);
-         } } /></div>
-        <div className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip='Order'  icon="pi pi-pencil" onClick={(e) =>{ if(Collapse===false){
-          setCollapse(true);
-          setisDashClick(false);
-          setisAccessClick(false);
-          setisInventoryClick(false);
-          setisChalanClick(false);
-          setisHrClick(false);
-          setisOrderClick(true);
-         }else{
-          if(isOrderClick){
-            setCollapse(false);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-          else{
-            setCollapse(true);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(true);
-          }
-
-         }
-         setmenuIndex(4)
-         } } /></div>
-        <div className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip='Chalan'  icon="pi pi-star" onClick={(e) =>{ if(Collapse===false){
-          setCollapse(true);
-          setisDashClick(false);
-          setisAccessClick(false);
-          setisInventoryClick(false);
-          setisChalanClick(true);
-          setisHrClick(false);
-          setisOrderClick(false);
-         }else{
-          if(isChalanClick){
-            setCollapse(false);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-          else{
-            setCollapse(true);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(true);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-
-         }
-         setmenuIndex(5)
-         }} /></div>
-        <div className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip='Access-Control'  icon="pi pi-check-circle" onClick={(e) =>{ if(Collapse===false){
-          setCollapse(true);
-          setisDashClick(false);
-          setisAccessClick(true);
-          setisInventoryClick(false);
-          setisChalanClick(false);
-          setisHrClick(false);
-          setisOrderClick(false);
-         }else{
-          if(isAccessClick){
-            setCollapse(false);
-            setisDashClick(false);
-            setisAccessClick(false);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-          else{
-            setCollapse(true);
-            setisDashClick(false);
-            setisAccessClick(true);
-            setisInventoryClick(false);
-            setisChalanClick(false);
-            setisHrClick(false);
-            setisOrderClick(false);
-          }
-
-         }
-         setmenuIndex(6)
-         }} /></div>
-
+              } /></div>
+        )
+      })}
+      
     </div>
         </div>
         <div className="flex  justify-content-center cl2 min-h-screen mt-3 " id="abc">
@@ -282,10 +145,10 @@ const Main = () => {
             </Splitter> :
               <Splitter style={{height: "calc(100vh)",width:"calc(100vw - 85px)"}} >
          
-              <SplitterPanel  size={15} minSize={5} className="flex align-items-start  justify-content-start splitter pt-5">
+              <SplitterPanel  size={15} minSize={5} className=" splitter pt-5">
               <ul className='ul'> { 
-                         menulist.map(element => {     
-                                if(element.menuIndex===menuIndex){
+                         childMenulist.map(element => {     
+                                if(element.parentMenuIndex===menuIndex){
                                   
                                     return(
                                     <li key={element.id}>
