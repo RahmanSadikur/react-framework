@@ -17,10 +17,7 @@ import './test.css'
 
 const ShowTest = ( {changeIsAddnew} ) => {
     const dispatch=useDispatch();
-    //const dispatch1=useDispatch();
     const tests=useSelector((state)=>state.reducer.data);
-    //const test1=useSelector((state)=>state.reducer.singleData);
-    //const [tests, setTests] = useState(testdetails);
     const [test, setTest] = useState({});
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
