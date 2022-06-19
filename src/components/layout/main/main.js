@@ -22,14 +22,8 @@ import "./main.css"
 
 
 const Main = () => {
- 
-  const [isDashClick, setisDashClick] = useState(false)
-  const [isHrClick, setisHrClick] = useState(false)
-  const [isInventoryClick, setisInventoryClick] = useState(false)
-  const [isOrderClick, setisOrderClick] = useState(false)
-  const [isChalanClick, setisChalanClick] = useState(false)
-  const [isAccessClick, setisAccessClick] = useState(false)
-  const [Collapse, setCollapse] = useState(true)
+
+  const [expand, setexpand] = useState(true)
   const [menuIndex, setmenuIndex] = useState(0)
   const childMenulist = [
     { id: 1, parentMenuIndex: 3,name:"store", title: 'Store',link:"/inventory/store",isSelect:false,hasChild:false },
@@ -42,6 +36,7 @@ const Main = () => {
     { id: 8, parentMenuIndex: 2,name:"userType", title: 'User Type',link:"/hr/usertype",isSelect:false,hasChild:false },
     { id: 9, parentMenuIndex: 2,name:"user", title: 'User',link:"/hr/user",isSelect:false,hasChild:false },
     { id: 10, parentMenuIndex: 2,name:"payslip", title: 'Payslip',link:"/hr/payslip",isSelect:false,hasChild:false },
+    { id: 11, parentMenuIndex: 6,name:"Test", title: 'Test',link:"/test",isSelect:false,hasChild:false },
 
 ];
 const mainMenulist = [
@@ -58,7 +53,7 @@ const mainMenulist = [
   
   
   
-  return <div className=''> 
+  return <div className='mainContainer'> 
     <div className='flex flex-wrap flex-row mb-5 ml-2 mr-2'>
       <div className='flex'>
       <NavBar/>
@@ -66,17 +61,17 @@ const mainMenulist = [
     </div>
 
 
-    <div className="flex flex-row flex-wrap card-container blue-container">
+    <div className="flex flex-row flex-wrap ">
      
-        <div className="flex align-items-start justify-content-center cl1 min-h-screen  font-bold text-white mt-5">
+        <div className="flex align-items-start justify-content-center cl1 min-h-screen  mt-5">
           
-        <div className="flex flex-column card-container green-container ">
+        <div className="flex flex-column card-container ">
 
         { mainMenulist.map(element => {
         return (
           <div key={element.id} className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip={`${element.title}`} icon={`${element.icon}`} onClick={(e) =>{
-            if(Collapse===false){
-              setCollapse(true);
+            if(expand===false){
+              setexpand(true);
               mainMenulist.forEach(e => {
                 if(e.id===element.id){
                   e.isSelect=true;
@@ -88,7 +83,7 @@ const mainMenulist = [
              
             }else{
              if(element.isSelect){
-               setCollapse(false);
+               setexpand(false);
                mainMenulist.forEach(e => {
               
                   e.isSelect=false;
@@ -96,7 +91,7 @@ const mainMenulist = [
               });
              }
              else{
-              setCollapse(true);
+              setexpand(true);
               mainMenulist.forEach(e => {
                 if(e.id===element.id){
                   e.isSelect=true;
@@ -117,10 +112,10 @@ const mainMenulist = [
       
     </div>
         </div>
-        <div className="flex  justify-content-center cl2 min-h-screen mt-3 " id="abc">
-          {Collapse===false? <Splitter style={{height: "calc(100vh)",width:"calc(100vw - 85px)"}} >
+        <div className="flex   cl2 min-h-screen mt-3 " >
+          {expand===false? <Splitter style={{height: "calc(100vh)",width:"calc(100vw - 85px)"}} >
                 
-                <SplitterPanel size={100} className="flex align-items-start justify-content-center ">
+                <SplitterPanel size={100} className="flex align-items-start justify-content-center pt-3">
                     
                      <Routes>
                    <Route exact path="/"  element={<Dashboard/>} />
@@ -135,8 +130,8 @@ const mainMenulist = [
                    <Route exact path="/hr/user"  element={<User/>} />
                    <Route exact path="/hr/profile"  element={<Credential/>} />
                    <Route exact path="/hr/payslip"  element={<Payslip/>} />
-                     <Route exact path="/test"  element={<Test/>} />
-                     <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
+                  <Route exact path="/test"  element={<Test/>} />
+                  <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
              
                    </Routes>
 
@@ -145,17 +140,17 @@ const mainMenulist = [
             </Splitter> :
               <Splitter style={{height: "calc(100vh)",width:"calc(100vw - 85px)"}} >
          
-              <SplitterPanel  size={15} minSize={5} className=" splitter pt-5">
+              <SplitterPanel  size={15} minSize={5} className=" splitter pt-4">
               <ul className='ul'> { 
                          childMenulist.map(element => {     
                                 if(element.parentMenuIndex===menuIndex){
                                   
                                     return(
                                     <li key={element.id}>
-                                      <div className=' pl-3'>
-                                        <Link to={element.link} className="menuclass">{element.title}</Link>
+                                     
+                                        <Link to={element.link} className="menuclass"> <div className='formenudiv pl-3'>{element.title}</div></Link>
                                        
-                                        </div>
+                                        
                                        
                                         </li>
                                         )
@@ -197,17 +192,6 @@ const mainMenulist = [
 
     </div>
 
-     
-      <div className='flex-row-reverse min-h-screen' >
-      {/* <div className={`switch ${menuCollapse ? "col-md-1" : "col-md-2"}`}  >
-     
-      <Sidebar menuCollapse={menuCollapse} setMenuCollapse={setMenuCollapse} />
-      </div>
-      <div className={`switch ${menuCollapse ? "col-md-11" : "col-md-10"}`}  > */}
-     
-
-      {/* </div> */}
-      </div>
 
       </div>;
       

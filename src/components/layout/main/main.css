@@ -1,23 +1,17 @@
 
-.container-fluid{
-    min-width: calc(100vw);
+.mainContainer{
+   overflow-y: hidden;
+   overflow-x: hidden;
     max-width:calc(100vw); 
     width: calc(100vw);
     height:calc(100vh);
-    min-height:calc(100vh) ;
     max-height: calc(100vh);
-    padding-left: 0px;
+   
 }
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    width: 100%;
-    padding-right: var(--bs-gutter-x,.75rem);
-    padding-left: 0px !important;
-    margin-right: auto;
-    margin-left: auto;
-}
+
 .cl1{
-    background-color: #088054;
-  box-shadow: #002417;
+background-color: #182c25;
+  box-shadow: #ecfff8;
     width: 65px;
     
 
@@ -30,11 +24,12 @@
 
 }
 .buttonClass{
-    background-color: #e21818;
+    color: #3b214b;
+    
 }
 .splitter{
     max-width: 200px;
-    background-color: #afd49a;
+    background-color: #59ff003f;
 }
 .ul{
     list-style-type: none;
@@ -48,10 +43,22 @@
     bottom: 0px;
 
 }
+.formenudiv{
+    border:.5px solid rgb(11, 35, 71);
+    padding: 7px;
+    border-bottom-right-radius: 10px;
+
+    
+}
 .menuclass{
     text-decoration: none !important;
-    text-decoration-color: #ffffff;
-    color: #ffffff;
-   font-weight: 500;
+    color: #065e28;  
+    font-size: small;
+    font-weight: 600;
+    
 
 }
+.menuclass:hover {
+    /*will change background-color of element on hover */
+    color: white; /*will change color of text within the element on hover */
+    }
