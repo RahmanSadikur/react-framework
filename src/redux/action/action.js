@@ -1,4 +1,4 @@
-import { GET_DETAILS,SAVE } from "../type";
+import { GET_DETAILS,SAVE,DELETE } from "../type";
 import React from 'react'
 import { UserTypeService } from "../../services/test/userTypeServices";
 
@@ -32,6 +32,20 @@ dispatch({
   }
   
 }
+const DeleteAction = (req) => {
+  const userTypeServices=new UserTypeService();
+ return function(dispatch){
+return userTypeServices.Delete(req).then((res)=>{
+
+dispatch({
+  type:DELETE,
+  payload:res.data.data,
+})
+})
+
+  }
+  
+}
 
 
-export {GetAllAction,SaveAction} ;
+export {GetAllAction,SaveAction,DeleteAction} ;

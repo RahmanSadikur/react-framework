@@ -1,5 +1,5 @@
 import React, { useState, useEffect , useRef} from 'react';
-import {GetAllAction,SaveAction} from '../../redux/action/action';
+import {GetAllAction,SaveAction,DeleteAction} from '../../redux/action/action';
 import { useDispatch,useSelector } from 'react-redux';
 
 import { DataTable } from 'primereact/datatable';
@@ -67,13 +67,12 @@ const ShowTest = ( {changeIsAddnew} ) => {
         </div>
     );
     const openNew = () => {
-       // setTest({});
        setId(null);
        setTitle('');
        setDate(Date.now);
        setIsDeleted(0);
-        setSubmitted(false);
-        setformDialog(true);
+       setSubmitted(false);
+       setformDialog(true);
     }
     const hideDialog = () => {
         setSubmitted(false);
@@ -89,8 +88,7 @@ const ShowTest = ( {changeIsAddnew} ) => {
             updatedAt:date
         }
         
-      dispatch(SaveAction(data));
-      // console.log(tests);
+       dispatch(SaveAction(data));
    
        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Saved Successfully', life: 3000 });
        hideDialog();
@@ -107,21 +105,25 @@ const ShowTest = ( {changeIsAddnew} ) => {
          setIsDeleted(a);
          setformDialog(true);
     }
-    const confirmDeleteProduct = (test) => {
-        setTest(test);
+    const confirmDeleteProduct = () => {
+      
         setdeleteTestDialog(true);
     }
 
-    const deleteProduct = () => {
-        let _tests = tests.filter(val => val.id !== test.id);
-       // setTests(_tests);
+    const deleteUserType = () => {   
         setdeleteTestDialog(false);
-        setTest({});
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        dispatch(DeleteAction(id));  
+         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Saved Successfully', life: 3000 });
     }
     const hideDeleteTestDialog = () => {
         setdeleteTestDialog(false);
     }
+    const deleteTestDialogFooter = (
+        <React.Fragment>
+            <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteTestDialog} />
+            <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteUserType} />
+        </React.Fragment>
+    );
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
@@ -134,14 +136,10 @@ const ShowTest = ( {changeIsAddnew} ) => {
         <React.Fragment>
             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
             <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={savetest} />
+            <Button label="Delete" icon="pi pi-trash" className="p-button-text" onClick={() => confirmDeleteProduct()} />
         </React.Fragment>
     );
-    const deleteTestDialogFooter = (
-        <React.Fragment>
-            <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteTestDialog} />
-            <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteProduct} />
-        </React.Fragment>
-    );
+
     const onInputChange = (e, title) => {
         const val = (e.target && e.target.value) || '';
         let _test = {...test};
@@ -155,16 +153,13 @@ const ShowTest = ( {changeIsAddnew} ) => {
         const val = e.value;
         let _test = {...test};
         _test.updatedAt = val;
-        setDate(val);
-         
-
+        setDate(val);         
         setTest(_test);
     }
    const onInputNumberChange=(e)=>{
     setId(e.value);
     }
     const onDropDownChange = (e) => {
-        console.log(e.value)
         const val =e.value;
         let _test = {...test};
         _test.isRemoved = val;
@@ -181,7 +176,6 @@ const ShowTest = ( {changeIsAddnew} ) => {
             <DataTable value={tests} selectionMode="single"
                 selection={test} onRowDoubleClick={(e) => {
                     edittest(e.data);
-                    //setTest(e.data);
                 
                 }} header={header} responsiveLayout="scroll"  dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"

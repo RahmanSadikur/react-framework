@@ -20,7 +20,7 @@ export class LayoutService {
           }
           };
         try{
-            return axios.get('http://localhost:1400/api/item/searchlist',options).then(data  =>data.data)
+            return axios.get('http://192.168.0.188:80/api/item/searchlist',options).then(data  =>data.data)
         
           }  catch (error) {
                 //const err = error as AxiosError
@@ -54,7 +54,7 @@ export class LayoutService {
           }
           };
         try{
-            return axios.get('http://localhost:1400/api/item/details/getbyitemid/'+1,options).then(data  =>data.data.data);
+            return axios.get('http://192.168.0.188:80/api/item/details/getbyitemid/'+id,options).then(data  =>data.data.data);
         
           }  catch (error) {
                 //const err = error as AxiosError

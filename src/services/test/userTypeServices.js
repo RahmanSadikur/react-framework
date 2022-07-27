@@ -6,4 +6,7 @@ return AxiosRequest("usertype/","GET",{})
 Save=(data)=>{
     return AxiosRequest("usertype/","POST",data)
     }
+ Delete=(id)=>{
+return AxiosRequest("usertype/delete/"+id,"POST",{})
+ }
 }

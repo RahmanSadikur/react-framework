@@ -1,4 +1,4 @@
-import {GET_DETAILS ,SAVE } from "../type";
+import {GET_DETAILS ,SAVE,DELETE } from "../type";
 const initState={
     data:[]
 }
@@ -27,6 +27,14 @@ const Reducer = (state=initState,action) => {
         }
         state.data.unshift(action.payload);
        
+        return {data:[...state.data]} ;
+      }
+      case DELETE:{
+        console.log(action.payload.id);
+        if(findIndexById(action.payload.id,state.data)!==-1){
+          state.data.splice(findIndexById(action.payload.id,state.data),1);
+         
+        }
         return {data:[...state.data]} ;
       }
          
