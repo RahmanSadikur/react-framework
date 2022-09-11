@@ -1,31 +1,42 @@
-import React, { useState,  useRef } from 'react';
+import React, { useState, useEffect ,  useRef } from 'react';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 import NavBar from '../nav/navBar';
-import { Routes,Route } from 'react-router-dom';
+// import { Routes,Route } from 'react-router-dom';
 import { Button } from 'primereact/button';
-import Dashboard from '../../../components/dashboard/dashboard';
-import Store from '../../inventory/store/store';
-import Branch from '../../inventory/branch/branch';
-import Category from '../../inventory/category/category';
-import SubCategory from '../../inventory/subCategory/subCategory';
-import Site from '../../inventory/site/site';
-import Item from '../../inventory/item/item';
-import ItemDetails from '../../inventory/itemDetails/itemDetails';
-import UserType from '../../hr/userType/userType';
-import User from '../../hr/user/user';
-import Credential from '../../hr/credential/credential';
-import Payslip from '../../hr/payslip/payslip';
-import Test from '../../test/test';
-import { Link } from 'react-router-dom';
-import SearchBarResult from '../../utility/searchBarResult'
+// import Dashboard from '../../../components/dashboard/dashboard';
+// import Store from '../../inventory/store/store';
+// import Branch from '../../inventory/branch/branch';
+// import Category from '../../inventory/category/category';
+// import SubCategory from '../../inventory/subCategory/subCategory';
+// import Site from '../../inventory/site/site';
+// import Item from '../../inventory/item/item';
+// import ItemDetails from '../../inventory/itemDetails/itemDetails';
+// import UserType from '../../hr/userType/userType';
+// import User from '../../hr/user/user';
+// import Credential from '../../hr/credential/credential';
+// import Payslip from '../../hr/payslip/payslip';
+// import Test from '../../test/test';
+// import { Link } from 'react-router-dom';
+// import SearchBarResult from '../../utility/searchBarResult'
 import "./main.css"
 import { mainMenulist,childMenulist } from '../menu/leftMenu';
+import { useDispatch,useSelector } from 'react-redux';
+import {GetTabList,SaveAction,CloseAction} from '../../../redux/action/tabAction';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 
 const Main = () => {
-
+  
+  const dispatch=useDispatch();
+  const routes=useSelector((state)=>state.TabReducer.data);
+  useEffect(()=>{
+    dispatch(GetTabList())
+  
+},[dispatch]);
   const [expand, setexpand] = useState(true)
   const [menuIndex, setmenuIndex] = useState(0)
+  const [key, setKey] = useState(1);
   
   
   return <div className='mainContainer'> 
@@ -92,7 +103,7 @@ const Main = () => {
                 
                 <SplitterPanel size={100} className="flex align-items-start justify-content-center pt-3">
                 
-                     <Routes>
+                     {/* <Routes>
                    <Route exact path="/"  element={<Dashboard/>} />
                    <Route exact path="/inventory/store"  element={<Store/>} />
                    <Route exact path="/inventory/branch"  element={<Branch/>} />
@@ -108,7 +119,26 @@ const Main = () => {
                   <Route exact path="/test"  element={<Test/>} />
                   <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
              
-                   </Routes>
+                   </Routes> */}
+                            <div className='col-12'>      
+                            <Tabs
+                                    id="controlled-tab-example"
+                                    activeKey={key}
+                                    onSelect={(k) => setKey(k)}
+                                    className="mb-3 "
+                                    
+                                  >
+                                    {routes.map(e=>{
+                            
+                                      return (      
+                                      <Tab eventKey={e.id} title={e.title}>
+                                      <e.component/>
+                                    </Tab>)
+                                    })}
+
+                                  </Tabs>                          
+                          </div>
+                   
 
 
                 </SplitterPanel>
@@ -122,11 +152,16 @@ const Main = () => {
                                   
                                     return(
                                     <li key={element.id}>
-                                     
-                                        <Link to={element.link} className="menuclass"> <div className='formenudiv pl-3'>{element.title}</div></Link>
-                                       
-                                        
-                                       
+                                     <Button label={element.title} icon={element.icon} className="p-button-text w-100 btn-text-align-start pl-3" onClick={() =>{
+                                    
+                                      let data={id:routes.length+1,component:element.component,title:element.title}
+                                          dispatch(SaveAction(data))
+                                          setKey(routes.length)
+                                          return;
+
+                                     }} />
+                                        {/* <Link to={element.link} className="menuclass"> <div className='formenudiv pl-3'>{element.title}</div></Link> */}
+        
                                         </li>
                                         )
                                   }
@@ -136,7 +171,7 @@ const Main = () => {
   
                <SplitterPanel size={85} minSize={80} className="flex align-items-start justify-content-center pt-3">
                           
-                          <Routes>
+                          {/* <Routes>
                           <Route exact path="/"  element={<Dashboard/>} />
                           <Route exact path="/inventory/store"  element={<Store/>} />
                           <Route exact path="/inventory/branch"  element={<Branch/>} />
@@ -152,11 +187,28 @@ const Main = () => {
                           <Route exact path="/test"  element={<Test/>} />
                           <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
   
-                          </Routes>
-  
-  
-                      </SplitterPanel>
-                  </Splitter>}
+                          </Routes> */}
+                          <div className='col-12'>      
+                            <Tabs
+                                    id="controlled-tab-example"
+                                    activeKey={key}
+                                    onSelect={(k) => setKey(k)}
+                                    className="mb-3 "
+                                    
+                                  >
+                                    {routes.map(e=>{
+                            
+                                      return (      
+                                      <Tab eventKey={e.id} title={e.title}>
+                                      <e.component/>
+                                    </Tab>)
+                                    })}
+
+                                  </Tabs>                          
+                          </div>
+
+        </SplitterPanel>
+          </Splitter>}
 
         
 

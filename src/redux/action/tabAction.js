@@ -1,5 +1,5 @@
 import { GET_TABS,ADD_TAB,CLOSE_TAB } from "../tabType"; 
-import { childMenulist } from "../../components/layout/menu/leftMenu";
+import { routelist } from "../../components/layout/menu/leftMenu";
 
 
 const GetTabList = () => {
@@ -8,7 +8,7 @@ const GetTabList = () => {
 
 dispatch({
   type:GET_TABS,
-  payload:childMenulist,
+  payload:routelist,
 })
 
 
@@ -39,4 +39,4 @@ const CloseAction = (req) => {
  }
 
 
-export {GetTabList,SaveAction,CLOSE_TAB} ;
+export {GetTabList,SaveAction,CloseAction} ;

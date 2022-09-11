@@ -71,3 +71,6 @@ background-color: #182c25;
     /*will change background-color of element on hover */
     color: white; /*will change color of text within the element on hover */
     }
+.btn-text-align-start{
+    text-align: start !important;
+}

@@ -2,7 +2,7 @@
   "name": "project",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://http://192.168.0.188/:80",
+  "proxy": "http://http://192.168.0.106/:1048",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.2",
     "@testing-library/jest-dom": "^5.16.2",

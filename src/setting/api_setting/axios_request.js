@@ -10,7 +10,7 @@ export async function AxiosRequest(url,method,data){
     // }
     try{ 
         return data?axios({
-        url:'http://192.168.0.188:80/api/'+url,
+        url:'http://192.168.0.106:1048/api/'+url,
          method:method,
          headers:header,
         
@@ -18,7 +18,7 @@ export async function AxiosRequest(url,method,data){
          timeout:1000,
          
      }):axios({
-        url:'http://192.168.0.188:80/api/'+url,
+        url:'http://192.168.0.106:1048/api/'+url,
          method:method,
          headers:header,
          params:{},
