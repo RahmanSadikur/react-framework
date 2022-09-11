@@ -125,7 +125,7 @@ const Main = () => {
                                     id="controlled-tab-example"
                                     activeKey={key}
                                     onSelect={(k) => setKey(k)}
-                                    className="mb-3 "
+                                    className="mb-3 tab-color"
                                     
                                   >
                                     {routes.map(e=>{
@@ -193,7 +193,7 @@ const Main = () => {
                                     id="controlled-tab-example"
                                     activeKey={key}
                                     onSelect={(k) => setKey(k)}
-                                    className="mb-3 "
+                                    className="mb-3 tab-color"
                                     
                                   >
                                     {routes.map(e=>{
