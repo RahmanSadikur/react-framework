@@ -14,12 +14,14 @@ background-color: #182c25;
   box-shadow: #ecfff8;
     width: 65px;
     
+    
 
 }
 .cl2{
     background-color: #ffffff;
     
     width: calc(100vw - 85px);
+   
    
 
 }

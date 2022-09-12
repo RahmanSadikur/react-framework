@@ -74,3 +74,19 @@
     height: fit-content !important;
     background-color: #c5e9e6 !important;
 }
+.overlay {
+    position: fixed;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 30%;
+    top: 30%;
+    left: 35%;
+    right: 25%;
+    bottom: 25%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
