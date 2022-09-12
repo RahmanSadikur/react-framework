@@ -1,8 +1,8 @@
-import React, { useState, useEffect ,  useRef } from 'react';
-import { Splitter, SplitterPanel } from 'primereact/splitter';
-import NavBar from '../nav/navBar';
+import React, { useState, useEffect } from "react";
+import { Splitter, SplitterPanel } from "primereact/splitter";
+import NavBar from "../nav/navBar";
 // import { Routes,Route } from 'react-router-dom';
-import { Button } from 'primereact/button';
+import { Button } from "primereact/button";
 // import Dashboard from '../../../components/dashboard/dashboard';
 // import Store from '../../inventory/store/store';
 // import Branch from '../../inventory/branch/branch';
@@ -18,92 +18,89 @@ import { Button } from 'primereact/button';
 // import Test from '../../test/test';
 // import { Link } from 'react-router-dom';
 // import SearchBarResult from '../../utility/searchBarResult'
-import "./main.css"
-import { mainMenulist,childMenulist } from '../menu/leftMenu';
-import { useDispatch,useSelector } from 'react-redux';
-import {GetTabList,SaveAction,CloseAction} from '../../../redux/action/tabAction';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-
+import "./main.css";
+import { mainMenulist, childMenulist } from "../menu/leftMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { GetTabList, SaveAction } from "../../../redux/action/tabAction";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 const Main = () => {
-  
-  const dispatch=useDispatch();
-  const routes=useSelector((state)=>state.TabReducer.data);
-  useEffect(()=>{
-    dispatch(GetTabList())
-  
-},[dispatch]);
-  const [expand, setexpand] = useState(true)
-  const [menuIndex, setmenuIndex] = useState(0)
+  const dispatch = useDispatch();
+  const routes = useSelector((state) => state.TabReducer.data);
+  useEffect(() => {
+    dispatch(GetTabList());
+  }, [dispatch]);
+  const [expand, setexpand] = useState(true);
+  const [menuIndex, setmenuIndex] = useState(0);
   const [key, setKey] = useState(1);
-  
-  
-  return <div className='mainContainer'> 
-    <div className='flex flex-wrap flex-row mb-5 ml-2 mr-2'>
-      <div className='flex'>
-      <NavBar/>
-      </div>
-    </div>
 
-
-    <div className="flex flex-row flex-wrap ">
-     
-        <div className="flex align-items-start justify-content-center cl1 min-h-screen  mt-5">
-          
-        <div className="flex flex-column card-container ">
-
-        { mainMenulist.map(element => {
-        return (
-          <div key={element.id} className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"><Button className="buttonClass " tooltip={`${element.title}`} icon={`${element.icon}`} onClick={(e) =>{
-            if(expand===false){
-              setexpand(true);
-              mainMenulist.forEach(e => {
-                if(e.id===element.id){
-                  e.isSelect=true;
-                }else{
-                  e.isSelect=false;
-                }
-                
-              });
-             
-            }else{
-             if(element.isSelect){
-               setexpand(false);
-               mainMenulist.forEach(e => {
-              
-                  e.isSelect=false;
-                
-              });
-             }
-             else{
-              setexpand(true);
-              mainMenulist.forEach(e => {
-                if(e.id===element.id){
-                  e.isSelect=true;
-                }else{
-                  e.isSelect=false;
-                }
-                
-              });
-             }
-   
-            }
-            setmenuIndex(element.id);
-           
-           }
-              } /></div>
-        )
-      })}
-      
-    </div>
+  return (
+    <div className="mainContainer">
+      <div className="flex flex-wrap flex-row mb-5 ml-2 mr-2">
+        <div className="flex">
+          <NavBar />
         </div>
-        <div className="flex   cl2 min-h-screen mt-3 " >
-          {expand===false? <Splitter style={{height: "calc(100vh)",width:"calc(100vw - 85px)"}} >
-                
-                <SplitterPanel size={100} className="flex align-items-start justify-content-center pt-3">
-                
-                     {/* <Routes>
+      </div>
+
+      <div className="flex flex-row flex-wrap ">
+        <div className="flex align-items-start justify-content-center cl1 min-h-screen  mt-5">
+          <div className="flex flex-column card-container ">
+            {mainMenulist.map((element) => {
+              return (
+                <div
+                  key={element.id}
+                  className="flex align-items-center justify-content-center w-3rem h-3rem  font-bold text-white  m-1"
+                >
+                  <Button
+                    className="buttonClass "
+                    tooltip={`${element.title}`}
+                    icon={`${element.icon}`}
+                    onClick={(e) => {
+                      if (expand === false) {
+                        setexpand(true);
+                        mainMenulist.forEach((e) => {
+                          if (e.id === element.id) {
+                            e.isSelect = true;
+                          } else {
+                            e.isSelect = false;
+                          }
+                        });
+                      } else {
+                        if (element.isSelect) {
+                          setexpand(false);
+                          mainMenulist.forEach((e) => {
+                            e.isSelect = false;
+                          });
+                        } else {
+                          setexpand(true);
+                          mainMenulist.forEach((e) => {
+                            if (e.id === element.id) {
+                              e.isSelect = true;
+                            } else {
+                              e.isSelect = false;
+                            }
+                          });
+                        }
+                      }
+                      setmenuIndex(element.id);
+                    }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex   cl2 min-h-screen mt-3 ">
+          {expand === false ? (
+            <Splitter
+              style={{ height: "calc(100vh)", width: "calc(100vw - 85px)" }}
+            >
+              <SplitterPanel
+                size={100}
+                className="flex align-items-start justify-content-center pt-3"
+              >
+                {/* <Routes>
                    <Route exact path="/"  element={<Dashboard/>} />
                    <Route exact path="/inventory/store"  element={<Store/>} />
                    <Route exact path="/inventory/branch"  element={<Branch/>} />
@@ -120,58 +117,64 @@ const Main = () => {
                   <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
              
                    </Routes> */}
-                            <div className='col-12'>      
-                            <Tabs
-                                    id="controlled-tab-example"
-                                    activeKey={key}
-                                    onSelect={(k) => setKey(k)}
-                                    className="mb-3 tab-color"
-                                    
-                                  >
-                                    {routes.map(e=>{
-                            
-                                      return (      
-                                      <Tab eventKey={e.id} title={e.title}>
-                                      <e.component state={e.data}/>
-                                    </Tab>)
-                                    })}
+                <div className="col-12">
+                  <Tabs
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                    className="mb-3 tab-color"
+                  >
+                    {routes.map((e) => {
+                      return (
+                        <Tab eventKey={e.id} title={e.title}>
+                          <e.component state={e.data} />
+                        </Tab>
+                      );
+                    })}
+                  </Tabs>
+                </div>
+              </SplitterPanel>
+            </Splitter>
+          ) : (
+            <Splitter
+              style={{ height: "calc(100vh)", width: "calc(100vw - 85px)" }}
+            >
+              <SplitterPanel size={15} minSize={5} className=" splitter pt-4">
+                <ul className="ul">
+                  {" "}
+                  {childMenulist.map((element) => {
+                    if (element.parentMenuIndex === menuIndex) {
+                      return (
+                        <li key={element.id}>
+                          <Button
+                            label={element.title}
+                            icon={element.icon}
+                            className="p-button-text w-100 btn-text-align-start pl-3"
+                            onClick={() => {
+                              let data = {
+                                id: routes.length + 1,
+                                component: element.component,
+                                title: element.title,
+                              };
+                              dispatch(SaveAction(data));
+                              setKey(routes.length);
+                              return;
+                            }}
+                          />
+                          {/* <Link to={element.link} className="menuclass"> <div className='formenudiv pl-3'>{element.title}</div></Link> */}
+                        </li>
+                      );
+                    }
+                  })}{" "}
+                </ul>
+              </SplitterPanel>
 
-                                  </Tabs>                          
-                          </div>
-                   
-
-
-                </SplitterPanel>
-            </Splitter> :
-              <Splitter style={{height: "calc(100vh)",width:"calc(100vw - 85px)"}} >
-         
-              <SplitterPanel  size={15} minSize={5} className=" splitter pt-4">
-              <ul className='ul'> { 
-                         childMenulist.map(element => {     
-                                if(element.parentMenuIndex===menuIndex){
-                                  
-                                    return(
-                                    <li key={element.id}>
-                                     <Button label={element.title} icon={element.icon} className="p-button-text w-100 btn-text-align-start pl-3" onClick={() =>{
-                                    
-                                      let data={id:routes.length+1,component:element.component,title:element.title}
-                                          dispatch(SaveAction(data))
-                                          setKey(routes.length)
-                                          return;
-
-                                     }} />
-                                        {/* <Link to={element.link} className="menuclass"> <div className='formenudiv pl-3'>{element.title}</div></Link> */}
-        
-                                        </li>
-                                        )
-                                  }
-                            })
-               } </ul>
-                      </SplitterPanel>
-  
-               <SplitterPanel size={85} minSize={80} className="flex align-items-start justify-content-center pt-3">
-                          
-                          {/* <Routes>
+              <SplitterPanel
+                size={85}
+                minSize={80}
+                className="flex align-items-start justify-content-center pt-3"
+              >
+                {/* <Routes>
                           <Route exact path="/"  element={<Dashboard/>} />
                           <Route exact path="/inventory/store"  element={<Store/>} />
                           <Route exact path="/inventory/branch"  element={<Branch/>} />
@@ -188,40 +191,29 @@ const Main = () => {
                           <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
   
                           </Routes> */}
-                          <div className='col-12'>      
-                            <Tabs
-                                    id="controlled-tab-example"
-                                    activeKey={key}
-                                    onSelect={(k) => setKey(k)}
-                                    className="mb-3 tab-color"
-                                    
-                                  >
-                                    {routes.map(e=>{
-                            
-                                      return (      
-                                      <Tab eventKey={e.id} title={e.title}>
-                                      <e.component state={e.data}/>
-                                    </Tab>)
-                                    })}
-
-                                  </Tabs>                          
-                          </div>
-
-        </SplitterPanel>
-          </Splitter>}
-
-        
-
-      
-      
+                <div className="col-12">
+                  <Tabs
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                    className="mb-3 tab-color"
+                  >
+                    {routes.map((e) => {
+                      return (
+                        <Tab eventKey={e.id} title={e.title}>
+                          <e.component state={e.data} />
+                        </Tab>
+                      );
+                    })}
+                  </Tabs>
+                </div>
+              </SplitterPanel>
+            </Splitter>
+          )}
+        </div>
       </div>
-      
-
     </div>
-
-
-      </div>;
-      
+  );
 };
 
 export default Main;
