@@ -11,6 +11,7 @@ import User from '../../hr/user/user';
 import Credential from '../../hr/credential/credential';
 import Payslip from '../../hr/payslip/payslip';
 import Test from '../../test/test';
+import SearchBarResult from '../../utility/searchBarResult'
 export const childMenulist = [
     { id: 1, parentMenuIndex: 3,component:Store,name:"store", title: 'Store',link:"/inventory/store" ,icon:"pi pi-chart-bar" ,isSelect:false,hasChild:false },
     { id: 2,parentMenuIndex: 3,component:Branch,name:"branch", title: 'Branch',link:"/inventory/branch",icon:"pi pi-chart-bar" ,isSelect:false,hasChild:false },

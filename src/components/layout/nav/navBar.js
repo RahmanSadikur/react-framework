@@ -4,16 +4,20 @@ import { AutoSuggest } from 'react-autosuggestions';
 import { Button } from 'primereact/button';
 import {LayoutService} from "../../../services/layout/layoutServices"
  import {useNavigate } from "react-router-dom";
+ import { useDispatch,useSelector } from 'react-redux';
+ import SearchBarResult from '../../utility/searchBarResult'
 import "./nav.css";
+import { SaveAction } from '../../../redux/action/tabAction';
 
 const NavBar = () => {
   const layoutService = new LayoutService();
   let navigate = useNavigate();
+  const dispatch=useDispatch();
   useEffect(() => {
      // countryservice.getCountries().then(data => setOptions(data));
      layoutService.getItemListForSearch().then(data=>{
        return setOptions(data.data);
-      });
+      },[dispatch]);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [options, setOptions] = useState([ ]);
@@ -29,7 +33,8 @@ const NavBar = () => {
         let id=idWithPostfix.split("]")[0];
         layoutService.getItemDetailsListForSearch(id).then(data=>{
 
-         return navigate("searchbarresult",{state: data });
+        // return navigate("searchbarresult",{state: data });
+        dispatch(SaveAction({id:999,component:SearchBarResult,title:"${data.id}",data:data}))
         });
 
       }

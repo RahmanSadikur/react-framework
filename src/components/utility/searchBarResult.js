@@ -3,8 +3,8 @@ import {useLocation} from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import './searchBarResult.css'
-const SearchBarResult = () => {
-    const { state } = useLocation();
+const SearchBarResult = ({state}) => {
+    // const { state } = useLocation();
     const columns = [
         {field: 'item.name', header: 'Name'},
         {field: 'size', header: 'Size'},

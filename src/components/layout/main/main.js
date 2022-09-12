@@ -132,7 +132,7 @@ const Main = () => {
                             
                                       return (      
                                       <Tab eventKey={e.id} title={e.title}>
-                                      <e.component/>
+                                      <e.component state={e.data}/>
                                     </Tab>)
                                     })}
 
@@ -200,7 +200,7 @@ const Main = () => {
                             
                                       return (      
                                       <Tab eventKey={e.id} title={e.title}>
-                                      <e.component/>
+                                      <e.component state={e.data}/>
                                     </Tab>)
                                     })}
 
