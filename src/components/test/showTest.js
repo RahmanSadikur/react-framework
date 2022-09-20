@@ -55,14 +55,27 @@ const ShowTest = ({ changeIsAddnew }) => {
   });
 
   const header = (
-    <div className="table-header">
-      {/* <h5 className="mx-0 my-1">Test Data</h5> */}
+    <div className="flex justify-content-between align-items-center">
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
           type="search"
           onInput={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
+        />
+      </span>
+      <span>
+        <Button
+          label="Refresh"
+          icon="pi pi-refresh"
+          className="p-button-info  mr-2 p-button-text"
+          onClick={refresh}
+        />
+        <Button
+          label="New"
+          icon="pi pi-plus"
+          className="p-button-success mr-2 p-button-text"
+          onClick={openNew}
         />
       </span>
     </div>
@@ -222,7 +235,7 @@ const ShowTest = ({ changeIsAddnew }) => {
       <Toast ref={toast} />
       <Loader />
 
-      <Toolbar className="mb-4" right={rightToolbarTemplate}></Toolbar>
+      {/* <Toolbar className="mb-4" right={rightToolbarTemplate}></Toolbar> */}
 
       <div className="row">
         <div className="col-md-12 datatable">
