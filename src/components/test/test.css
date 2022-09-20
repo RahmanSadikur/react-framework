@@ -1,5 +1,5 @@
 .p-datatable .p-datatable-header {
-    border-radius:  15px 15px 0px 0px !important; 
+    border-radius:  5px 5px 0px 0px !important; 
     color: #dee2e6 !important;
     border: 1px solid #dee2e6;
     border-width: 1px 1px 1px 1px !important;
@@ -36,7 +36,7 @@
 }
 .p-datatable .p-paginator-bottom {
     border-width: 1px 1px 1px 1px !important;
-    border-radius: 0px 0px 15px 15px !important; 
+    border-radius: 0px 0px 5px 5px !important; 
     background-color: #c5e9e6 !important;
     color: #dee2e6 !important;
     padding: .3px !important;
@@ -47,7 +47,7 @@
     background-color: #c5e9e6 !important;
     border: 1px solid #dee2e6 !important;
     padding: .3rem !important;
-    border-radius: 15px !important;
+    border-radius: 5px !important;
     margin-top: 1.2rem !important;
 }
 .p-dialog .p-dialog-header {
@@ -56,8 +56,8 @@
     background: #ffffff;
     color: #343a40;
     padding: .5rem !important;
-    border-top-right-radius: 15px !important;
-    border-top-left-radius: 15px !important;
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
 }
 .p-dialog .p-dialog-footer {
     background-color: #c5e9e6 !important;
@@ -66,8 +66,8 @@
     color: #495057;
     padding: .5rem !important;
     text-align: right;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 .p-calendar-w-btn-right .p-datepicker-trigger {
     border-top-left-radius: 0;
