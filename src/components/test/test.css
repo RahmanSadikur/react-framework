@@ -90,3 +90,8 @@
     z-index: 2;
     cursor: pointer;
   }
+
+  .p-datatable {
+    min-height: calc(100vh - 320px) ;
+    max-height: calc(100vh - 320px) ;
+  }

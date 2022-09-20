@@ -79,3 +79,12 @@ background-color: #182c25;
 .tab-color{
     background-color: #f0f8ff !important;
 }
+
+.tab-height{
+
+    
+    height: calc(100vh - 65px);
+   
+   
+
+}

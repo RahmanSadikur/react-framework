@@ -117,7 +117,7 @@ const Main = () => {
                   <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
              
                    </Routes> */}
-                <div className="col-12">
+                <div className="col-12 tab-height">
                   <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
@@ -191,7 +191,7 @@ const Main = () => {
                           <Route exact path="/searchbarresult"  element={<SearchBarResult/>} />
   
                           </Routes> */}
-                <div className="col-12">
+                <div className="col-12 tab-height">
                   <Tabs
                     id="controlled-tab-example"
                     activeKey={key}

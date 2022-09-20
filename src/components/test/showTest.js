@@ -19,7 +19,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import "./test.css";
 import Loader from "../utility/loader/loader";
-import { OnLoader } from "../../redux/action/loaderAction";
+import { OnLoader, OffLoader } from "../../redux/action/loaderAction";
 
 const ShowTest = ({ changeIsAddnew }) => {
   const dispatch = useDispatch();
@@ -41,7 +41,9 @@ const ShowTest = ({ changeIsAddnew }) => {
   ];
 
   useEffect(() => {
+    dispatch(OnLoader());
     dispatch(GetAllAction());
+    dispatch(OffLoader());
   }, [dispatch]);
 
   const columns = [
@@ -51,17 +53,7 @@ const ShowTest = ({ changeIsAddnew }) => {
   const dynamicColumns = columns.map((col, i) => {
     return <Column key={col.field} field={col.field} header={col.header} />;
   });
-  const findIndexById = (id, objects) => {
-    let index = -1;
-    for (let i = 0; i < objects.length; i++) {
-      if (objects[i].id === id) {
-        index = i;
-        break;
-      }
-    }
 
-    return index;
-  };
   const header = (
     <div className="table-header">
       {/* <h5 className="mx-0 my-1">Test Data</h5> */}
@@ -76,7 +68,6 @@ const ShowTest = ({ changeIsAddnew }) => {
     </div>
   );
   const openNew = () => {
-    dispatch(OnLoader());
     setId(null);
     setTitle("");
     setDate(Date.now);
@@ -84,11 +75,17 @@ const ShowTest = ({ changeIsAddnew }) => {
     setSubmitted(false);
     setformDialog(true);
   };
+  const refresh = () => {
+    dispatch(OnLoader());
+    dispatch(GetAllAction());
+    dispatch(OffLoader());
+  };
   const hideDialog = () => {
     setSubmitted(false);
     setformDialog(false);
   };
   const savetest = () => {
+    dispatch(OnLoader());
     setSubmitted(true);
 
     let data = {
@@ -106,6 +103,7 @@ const ShowTest = ({ changeIsAddnew }) => {
       detail: "Saved Successfully",
       life: 3000,
     });
+    dispatch(OffLoader());
     hideDialog();
   };
 
@@ -123,6 +121,7 @@ const ShowTest = ({ changeIsAddnew }) => {
   };
 
   const deleteUserType = () => {
+    dispatch(OnLoader());
     setdeleteTestDialog(false);
     dispatch(DeleteAction(id));
     toast.current.show({
@@ -131,6 +130,7 @@ const ShowTest = ({ changeIsAddnew }) => {
       detail: "Saved Successfully",
       life: 3000,
     });
+    dispatch(OffLoader());
   };
   const hideDeleteTestDialog = () => {
     setdeleteTestDialog(false);
@@ -155,9 +155,15 @@ const ShowTest = ({ changeIsAddnew }) => {
     return (
       <React.Fragment>
         <Button
+          label="Refresh"
+          icon="pi pi-refresh"
+          className="p-button-info  mr-2 p-button-text"
+          onClick={refresh}
+        />
+        <Button
           label="New"
           icon="pi pi-plus"
-          className="p-button-success mr-2"
+          className="p-button-success mr-2 p-button-text"
           onClick={openNew}
         />
       </React.Fragment>
@@ -212,14 +218,14 @@ const ShowTest = ({ changeIsAddnew }) => {
     setTest(_test);
   };
   return (
-    <div className="container">
+    <div className="main-container">
       <Toast ref={toast} />
       <Loader />
 
       <Toolbar className="mb-4" right={rightToolbarTemplate}></Toolbar>
 
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12 datatable">
           <DataTable
             value={tests}
             selectionMode="single"
@@ -231,7 +237,8 @@ const ShowTest = ({ changeIsAddnew }) => {
             responsiveLayout="scroll"
             dataKey="id"
             paginator
-            rows={10}
+            rows={100}
+            size="large"
             rowsPerPageOptions={[5, 10, 25]}
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Tests"
