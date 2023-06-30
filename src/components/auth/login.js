@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -8,40 +8,56 @@ import "./login.css";
 import Loader from "../utility/loader/loader";
 import { useDispatch } from "react-redux";
 import { OnLoader, OffLoader } from "../../redux/action/loaderAction";
+import { Toast } from 'primereact/toast';
 
-async function loginUser(credentials, dispatch) {
-  const options = {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
 
-  try {
-    dispatch(OnLoader());
-    return axios
-      .post("http://192.168.0.106:1048/api/auth", credentials)
-      .then((data) => {
-        dispatch(OffLoader());
-        return data;
-      });
-  } catch (error) {
-    //const err = error as AxiosError
-    dispatch(OffLoader());
-    if (error.response) {
-      console.log(error.response.status);
-      console.log(error.response.data);
-    } else if (error.request) {
-      console.log(error.request);
-    } else {
-      console.log("Error", error);
-      console.log("Error", error.message);
-    }
-    console.log(error.config);
-  }
-}
 const Login = ({ setToken }) => {
+  const toast = useRef(null);
+  async function loginUser(credentials, dispatch) {
+    const options = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    try {
+      dispatch(OnLoader());
+      return axios
+        .post("http://192.168.0.102:8080/api/auth", credentials)
+        .then((data) => {
+          dispatch(OffLoader());
+          if(data!==undefined && data!==null){
+          
+            if(data.data.hasError!==undefined && data.data.hasError!==null && data.data.hasError===true){
+              toast.current.show({severity: 'error', summary: 'Error Message', detail: data.data.message});
+              return data;
+              
+            }else{
+             
+              return data;
+              
+            }
+           
+          }
+         
+        })
+    } catch (error) {
+      //const err = error as AxiosError
+      dispatch(OffLoader());
+      if (error.response) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error);
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    }
+  }
+
   const dispatch = useDispatch();
   useEffect(() => {}, [dispatch]);
   let navigate = useNavigate();
@@ -50,18 +66,21 @@ const Login = ({ setToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser(
+    const token= await loginUser(
       {
         userName,
         password,
       },
       dispatch
     );
-
+    
     if (token !== null || token !== undefined) {
-      setToken(token.data);
-      sessionStorage.setItem("userName", userName);
-      window.location.href = "/dashboard";
+      if(token.data.hasError===undefined||token.data.hasError===false){
+        setToken(token.data);
+        sessionStorage.setItem("userName", userName);
+        window.location.href = "/dashboard";
+      }
+      
     }
   };
   return (
@@ -73,6 +92,7 @@ const Login = ({ setToken }) => {
 
           <div className="Login card-body">
             <Loader />
+            <Toast ref={toast} />
             <form onSubmit={handleSubmit}>
               <Form.Group size="lg" controlId="email">
                 <Form.Label>Email</Form.Label>

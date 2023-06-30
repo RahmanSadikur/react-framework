@@ -1,33 +1,30 @@
 import axios from 'axios';
 export async function AxiosRequest(url,method,data){
     const  token = JSON.parse(sessionStorage.getItem('token'));
-    const header={
-        "Authorization" : `Bearer ${token}`,
-    }
-    // if(data!=null){
-    //    data = JSON.stringify(data);
-    //    console.log(data); 
-    // }
-    try{ 
-        return data?axios({
-        url:'http://192.168.0.106:1048/api/'+url,
-         method:method,
-         headers:header,
-        
-         data:data,
-         timeout:1000,
-         
-     }):axios({
-        url:'http://192.168.0.106:1048/api/'+url,
-         method:method,
-         headers:header,
-         params:{},
-         timeout:1000,
-         
-     });}
-     catch(error){
-        console.error(error.response.data); 
-     }
+
+  const header={
+    "Authorization" : `Bearer ${token}`,
+}
+
+     try{ 
+      return data?axios({
+       url:'http://192.168.0.102:8080/api/'+url,
+       method:method,
+       headers:header,        
+       data:data,
+      timeout:1000,
+       
+   }):axios({
+      url:'http://192.168.0.102:8080/api/'+url,
+       method:method,
+       headers:header,
+       params:{},
+        timeout:1000,
+       
+   });}
+   catch(error){
+      console.log(error.response.data); 
+   }
     
  }
 

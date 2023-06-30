@@ -11,18 +11,24 @@ const Loader = () => {
   const isLoading = useSelector((state) => state.LoaderReducer.isLoading);
   return (
     <div className={isLoading ? "overlayON" : "overlayOff"}>
+      <div className={"divStyle"}>
+     
       <ThreeCircles
-        height="100"
-        width="100"
-        color="#a9d9e6"
+        height="80"
+        width="80"
         wrapperStyle={{}}
         wrapperClass=""
         visible={isLoading}
         ariaLabel="three-circles-rotating"
-        outerCircleColor=""
-        innerCircleColor=""
-        middleCircleColor=""
+        outerCircleColor="#13f1e5"
+        innerCircleColor="#13f149"
+        middleCircleColor="#e7f113"
       />
+   
+
+      <h2 className={"h2Style"}>Loading...</h2>
+      </div>
+
     </div>
   );
 };

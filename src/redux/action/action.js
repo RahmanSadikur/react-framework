@@ -1,5 +1,4 @@
 import { GET_DETAILS,SAVE,DELETE } from "../type";
-import React from 'react'
 import { UserTypeService } from "../../services/test/userTypeServices";
 
 
@@ -7,7 +6,8 @@ const GetAllAction = () => {
   const userTypeServices=new UserTypeService();
  return function(dispatch){
 return userTypeServices.GetAll().then((res)=>{
-dispatch({
+  console.log(res)
+  dispatch({
   type:GET_DETAILS,
   payload:res.data.data,
 })
@@ -19,6 +19,7 @@ dispatch({
 
 
 const SaveAction = (req) => {
+  
   const userTypeServices=new UserTypeService();
  return function(dispatch){
 return userTypeServices.Save(req).then((res)=>{

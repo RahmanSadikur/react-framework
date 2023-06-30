@@ -24,21 +24,25 @@ const NavBar = () => {
     e.preventDefault();
 
     if (product === "" || product === undefined || product === null) {
+      console.log("Product is empty, undefined, or null.");
       return;
     } else {
-      let idWithPostfix = product.split("[")[1];
-      let id = idWithPostfix.split("]")[0];
-      layoutService.getItemDetailsListForSearch(id).then((data) => {
-        // return navigate("searchbarresult",{state: data });
-        dispatch(
-          SaveAction({
-            id: 99999 + id,
-            component: SearchBarResult,
-            title: product,
-            data: data,
-          })
-        );
-      });
+      if (product.includes("[") && product.split("[").length > 1){
+        let idWithPostfix = product.split("[")[1];
+        let id = idWithPostfix.split("]")[0];
+        layoutService.getItemDetailsListForSearch(id).then((data) => {
+          // return navigate("searchbarresult",{state: data });
+          dispatch(
+            SaveAction({
+              id: 99999 + id,
+              component: SearchBarResult,
+              title: product,
+              data: data,
+            })
+          );
+        });
+      }
+
     }
   };
   // let navigate = useNavigate();

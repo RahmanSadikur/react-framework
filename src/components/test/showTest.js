@@ -32,7 +32,7 @@ const ShowTest = ({ changeIsAddnew }) => {
   const [deleteTestDialog, setdeleteTestDialog] = useState(false);
   const [id, setId] = useState(null);
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState(Date.now);
+  const [date, setDate] = useState(null);
   const [isDeleted, setIsDeleted] = useState(0);
 
   const isRemoved = [
@@ -69,13 +69,13 @@ const ShowTest = ({ changeIsAddnew }) => {
           label="Refresh"
           icon="pi pi-refresh"
           className="p-button-info  mr-2 p-button-text"
-          onClick={refresh}
+          onClick={()=>{refresh()}}
         />
         <Button
           label="New"
           icon="pi pi-plus"
           className="p-button-success mr-2 p-button-text"
-          onClick={openNew}
+          onClick={()=>{openNew()}}
         />
       </span>
     </div>
@@ -83,7 +83,7 @@ const ShowTest = ({ changeIsAddnew }) => {
   const openNew = () => {
     setId(null);
     setTitle("");
-    setDate(Date.now);
+    setDate(Date.now.toString());
     setIsDeleted(0);
     setSubmitted(false);
     setformDialog(true);
@@ -107,7 +107,6 @@ const ShowTest = ({ changeIsAddnew }) => {
       isRemoved: isDeleted,
       updatedAt: date,
     };
-
     dispatch(SaveAction(data));
 
     toast.current.show({
@@ -125,7 +124,7 @@ const ShowTest = ({ changeIsAddnew }) => {
     let a = t.isRemoved ? 1 : 0;
     setId(t.id);
     setTitle(t.title);
-    setDate(t.updatedAt);
+    setDate(t.updatedAt.toString());
     setIsDeleted(a);
     setformDialog(true);
   };
@@ -246,6 +245,9 @@ const ShowTest = ({ changeIsAddnew }) => {
             onRowDoubleClick={(e) => {
               edittest(e.data);
             }}
+            scrollable="true"
+            scrollDirection="vertical"
+            scrollHeight="460px"
             header={header}
             responsiveLayout="scroll"
             dataKey="id"
